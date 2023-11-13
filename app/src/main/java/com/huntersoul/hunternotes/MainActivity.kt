@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.huntersoul.hunternotes.ui.theme.HunterNotesTheme
 import com.huntersoul.hunternotes.R.string
+import com.huntersoul.hunternotes.screens.HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,38 +35,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NotasMain()
+                    HomeScreen()
                 }
             }
         }
     }
 }
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@Composable
-fun NotasMain(modifier: Modifier = Modifier){
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        topBar = {
-            Box(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .size(56.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = stringResource(com.huntersoul.hunternotes.R.string.app_name)
-                )
-            }
-        }
-    ) {
-    }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    HunterNotesTheme {
-    }
-}

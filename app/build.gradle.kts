@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -50,6 +51,22 @@ android {
 }
 
 dependencies {
+
+    //Room
+    val room_version = "2.6.0"
+
+    implementation ("androidx.room:room-runtime:$room_version")
+    kapt ("androidx.room:room-compiler:$room_version")
+
+    //Navigation
+    val navigation_compose_version = "2.7.4"
+    implementation ("androidx.navigation:navigation-compose:$navigation_compose_version")
+
+    //Material 3
+    val version_material_3 = "1.2.0-alpha09"
+    implementation("androidx.compose.material3:material3-android:$version_material_3")
+    implementation("androidx.compose.material3:material3-window-size-class:$version_material_3")
+
     implementation("androidx.compose.material:material:1.2.0")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
