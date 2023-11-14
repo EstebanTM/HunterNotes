@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.huntersoul.hunternotes"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.huntersoul.hunternotes"
@@ -31,11 +31,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -63,7 +63,7 @@ dependencies {
     implementation ("androidx.navigation:navigation-compose:$navigation_compose_version")
 
     //Material 3
-    val version_material_3 = "1.2.0-alpha09"
+    val version_material_3 = "1.2.0-alpha10"
     implementation("androidx.compose.material3:material3-android:$version_material_3")
     implementation("androidx.compose.material3:material3-window-size-class:$version_material_3")
 
