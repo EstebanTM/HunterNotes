@@ -8,10 +8,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import com.huntersoul.hunternotes.viewmodel.NotaViewModel
 
 @Preview
 @Composable
-fun AddNoteScreen(){
+fun AddNoteScreen(navController: NavController, viewModel: NotaViewModel){
     var text by rememberSaveable { mutableStateOf("") }
 
     TextField(

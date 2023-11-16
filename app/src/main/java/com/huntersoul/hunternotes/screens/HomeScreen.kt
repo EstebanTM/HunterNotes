@@ -28,6 +28,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.room.Room
 import com.huntersoul.hunternotes.components.FloatingButton
 import com.huntersoul.hunternotes.components.NotaCard
@@ -37,11 +39,9 @@ import com.huntersoul.hunternotes.notaDao.NotaDao
 import com.huntersoul.hunternotes.repository.NotaRepository
 import com.huntersoul.hunternotes.viewmodel.NotaViewModel
 
-@Preview
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
-) {
+fun HomeScreen(navController: NavHostController, repository: NotaRepository) {
     val db = Room.databaseBuilder(LocalContext.current, NotaDataBase::class.java, "nota_db").allowMainThreadQueries().build()
     val dao = db.dao
     val repositorio = NotaRepository(dao)
@@ -49,7 +49,7 @@ fun HomeScreen(
     val notas by remember { notaViewModel.notas }.collectAsState(emptyList())
     Scaffold(
         floatingActionButton = {
-            FloatingButton()
+            FloatingButton(navController)
         },
         topBar = {
             CenterAlignedTopAppBar(
