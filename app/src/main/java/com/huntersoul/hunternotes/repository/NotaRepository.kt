@@ -36,8 +36,8 @@ class NotaRepository(private val notaDao: NotaDao) {
     }
 
     fun eliminarNota(nota: NotaEntity) {
-        // AquÃ­ debes implementar la lÃ³gica para eliminar la nota de la base de datos
-        // y luego actualizar el estado de la aplicaciÃ³n
+        // Aquí debes implementar la lógica para eliminar la nota de la base de datos
+        // y luego actualizar el estado de la aplicación
         viewModelScope.launch {
             notaRepository.eliminarNota(nota)
             state = state.copy(
