@@ -1,30 +1,45 @@
 package com.huntersoul.hunternotes.viewmodel
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.huntersoul.hunternotes.models.NotaEntity
 import com.huntersoul.hunternotes.repository.NotaRepository
+import com.huntersoul.hunternotes.state.NotaState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class NotaViewModel(private val notaRepository: NotaRepository) : ViewModel() {
-    private val _notas = MutableStateFlow<List<NotaEntity>>(emptyList())
-    val notas = _notas.asStateFlow()
+class NotaViewModel(
+    private val notaRepository: NotaRepository) : ViewModel() {
+    var state by mutableStateOf(NotaState())
+        private set
 
     init {
-        // Cargar las notas al inicializar el ViewModel
-        cargarNotas()
+       viewModelScope.launch {
+           state = state.copy(
+               notas = notaRepository.obtenerTodasLasNotas()
+           )
+       }
+    }
+    fun guardarNota(nota: NotaEntity){
+        viewModelScope.launch {
+            notaRepository.insertarNota(nota)
+        }
     }
 
-    private fun cargarNotas() {
-        viewModelScope.launch(Dispatchers.IO) {
-            // Obtener las notas desde la base de datos Room
-            val listaNotas = notaRepository.obtenerTodasLasNotas()
+    fun actualizarNota(nota: NotaEntity){
+        viewModelScope.launch {
+            notaRepository.actualizarNota(nota)
+        }
+    }
 
-            // Actualizar el estado con las notas cargadas
-            _notas.value = listaNotas
+    fun eliminarNota(nota:NotaEntity){
+        viewModelScope.launch {
+            notaRepository.eliminarNota(nota)
         }
     }
 }

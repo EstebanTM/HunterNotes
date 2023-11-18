@@ -8,5 +8,6 @@ data class NotaEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val titulo: String,
-    val contenido: String
+    val contenido: String?,
+    val multimedia: String?
 )
