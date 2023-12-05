@@ -17,7 +17,7 @@ interface NotaDao {
     fun getAllNotes(): List<NotaEntity>
 
     @Query("SELECT * FROM NotaEntity WHERE id = :notaId")
-    fun getNotaById(notaId: Int): NotaEntity
+    fun getNota(notaId: Int): NotaEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertNota(nota: NotaEntity)

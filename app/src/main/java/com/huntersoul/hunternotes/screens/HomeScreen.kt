@@ -42,11 +42,6 @@ import com.huntersoul.hunternotes.viewmodel.NotaViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavHostController, repository: NotaRepository) {
-    val db = Room.databaseBuilder(LocalContext.current, NotaDataBase::class.java, "nota_db").allowMainThreadQueries().build()
-    val dao = db.dao
-    val repositorio = NotaRepository(dao)
-    val notaViewModel = NotaViewModel(repositorio)
-    val notas by remember { notaViewModel.notas }.collectAsState(emptyList())
     Scaffold(
         floatingActionButton = {
             FloatingButton(navController)
