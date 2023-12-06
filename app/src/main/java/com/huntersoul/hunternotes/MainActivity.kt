@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import com.huntersoul.hunternotes.ui.theme.HunterNotesTheme
 import com.huntersoul.hunternotes.R.string
 import com.huntersoul.hunternotes.navigation.NavManager
-import com.huntersoul.hunternotes.screens.HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

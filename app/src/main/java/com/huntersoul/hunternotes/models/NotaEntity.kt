@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 data class NotaEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val titulo: String,
-    val contenido: String,
-    val descripcion: String,
-    val multimedia: Any
+    val titulo: String?,
+    val contenido: String?,
+    val multimedia: String?,
+    val fecha: String?,
 )

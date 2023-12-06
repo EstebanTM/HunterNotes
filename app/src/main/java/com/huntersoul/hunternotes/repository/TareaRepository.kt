@@ -13,15 +13,15 @@ class TareaRepository(
     fun obtenerTarea(id: Int): TareaEntity {
         return tareaDao.getTarea(id)
     }
-    fun insertarNota(tarea: TareaEntity) {
+    fun insertarTarea(tarea: TareaEntity) {
         tareaDao.insertTarea(tarea)
     }
 
-    fun actualizarNota(tarea: TareaEntity) {
-
+    fun actualizarTarea(tarea: TareaEntity) {
+        tareaDao.actualizarTarea(tarea)
     }
 
-    fun eliminarNota(tarea: TareaEntity) {
-
+    fun eliminarTarea(tarea: TareaEntity) {
+        tareaDao.eliminarTarea(tarea)
     }
 }

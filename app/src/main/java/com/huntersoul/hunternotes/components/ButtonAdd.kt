@@ -11,10 +11,41 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 
 @Composable
-fun FloatingButton(navController: NavHostController){
+fun FloatingButtonAddNota(navController: NavHostController){
     ExtendedFloatingActionButton(
         onClick = {
             navController.navigate("agregarNota")
+        }){
+        Icon(Icons.Default.Add, "")
+        Text(text= "")
+    }
+}
+
+@Composable
+fun FloatingButtonAddTarea(navController: NavHostController){
+    ExtendedFloatingActionButton(
+        onClick = {
+            navController.navigate("agregarTarea")
+        }){
+        Icon(Icons.Default.Add, "")
+        Text(text= "")
+    }
+}
+@Composable
+fun FloatingEditarNota(navController: NavHostController){
+    ExtendedFloatingActionButton(
+        onClick = {
+            navController.navigate("Notas")
+        }){
+        Icon(Icons.Default.Add, "")
+        Text(text= "")
+    }
+}
+@Composable
+fun FloatingButtonEditarTarea(navController: NavHostController){
+    ExtendedFloatingActionButton(
+        onClick = {
+            navController.navigate("Tareas")
         }){
         Icon(Icons.Default.Add, "")
         Text(text= "")

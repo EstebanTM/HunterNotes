@@ -17,10 +17,10 @@ class NotaRepository(
     }
 
     fun actualizarNota(nota: NotaEntity) {
-
+        notaDao.actualizarNota(nota)
     }
 
     fun eliminarNota(nota: NotaEntity) {
-
+        notaDao.eliminarNota(nota)
     }
 }

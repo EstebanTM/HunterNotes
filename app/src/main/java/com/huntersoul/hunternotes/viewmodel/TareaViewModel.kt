@@ -28,21 +28,21 @@ class TareaViewModel(
             )
         }
     }
-    fun guardarNota(tarea: TareaEntity){
+    fun guardarTarea(tarea: TareaEntity){
         viewModelScope.launch {
-            tareaRepository.insertarNota(tarea)
+            tareaRepository.insertarTarea(tarea)
         }
     }
 
-    fun actualizarNota(tarea: TareaEntity){
+    fun actualizarTarea(tarea: TareaEntity){
         viewModelScope.launch {
-            tareaRepository.actualizarNota(tarea)
+            tareaRepository.actualizarTarea(tarea)
         }
     }
 
-    fun eliminarNota(tarea: TareaEntity){
+    fun eliminarTarea(tarea: TareaEntity){
         viewModelScope.launch {
-            tareaRepository.eliminarNota(tarea)
+            tareaRepository.eliminarTarea(tarea)
         }
     }
 }

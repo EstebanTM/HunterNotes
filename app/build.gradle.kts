@@ -52,6 +52,10 @@ android {
 
 dependencies {
 
+    // mapas
+    implementation("org.osmdroid:osmdroid-android:6.1.17")
+    implementation("tech.utsmankece:osm-android-compose:0.0.5")
+
     //Room
     val room_version = "2.6.0"
 
@@ -61,6 +65,9 @@ dependencies {
     //Navigation
     val navigation_compose_version = "2.7.4"
     implementation ("androidx.navigation:navigation-compose:$navigation_compose_version")
+
+    //Coil
+    implementation("io.coil-kt:coil-compose:2.5.0")
 
     //Material 3
     val version_material_3 = "1.2.0-alpha10"

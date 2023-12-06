@@ -1,8 +1,10 @@
 package com.huntersoul.hunternotes.components
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.outlined.Create
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.Icon
@@ -11,6 +13,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -22,7 +25,9 @@ import com.huntersoul.hunternotes.R
 
 @Composable
 fun NavBar(navController: NavHostController) {
-    NavigationBar {
+    NavigationBar(
+        containerColor = Color.Black
+    ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination =  navBackStackEntry?.destination
 
@@ -30,12 +35,12 @@ fun NavBar(navController: NavHostController) {
             BottomNavigationItem(
                 title = "Notas",
                 selectedIcon = ImageVector.vectorResource(R.drawable.outline_note_24),
-                unselectedIcon = ImageVector.vectorResource(R.drawable.notaicons),
+                unselectedIcon = ImageVector.vectorResource(R.drawable.outline_note_24),
             ),
             BottomNavigationItem(
                 title = "Tareas",
-                selectedIcon = Icons.Filled.ShoppingCart,
-                unselectedIcon = Icons.Outlined.ShoppingCart,
+                selectedIcon = Icons.Filled.Create,
+                unselectedIcon = Icons.Outlined.Create,
             )
         )
 

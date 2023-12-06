@@ -3,6 +3,7 @@ package com.huntersoul.hunternotes.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -14,19 +15,17 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.huntersoul.hunternotes.models.NotaEntity
+import com.huntersoul.hunternotes.models.TareaEntity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NotaCard(
-    nota: NotaEntity,
+fun TareaCard(
+    tarea: TareaEntity,
     navHostController: NavHostController
 ){
     Card (
@@ -35,43 +34,46 @@ fun NotaCard(
         ),
         modifier = Modifier
             .fillMaxWidth()
-            .height(80.dp)
-            .padding(5.dp),
+            .height(90.dp)
+            .padding(10.dp),
+
         onClick = {
-            navHostController.navigate("EditarNota/${nota.id}")
+            navHostController.navigate("EditarTarea/${tarea.id}")
         }
     ){
         Column(
-            modifier = Modifier.fillMaxSize()
-                .padding(3.dp, 2.dp, 3.dp, 2.dp)
+            modifier = Modifier.fillMaxSize().padding(4.dp, 2.dp, 3.dp, 2.dp)
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth()
             ){
-                Text(
-                    text = nota.titulo.toString(),
-                    textAlign = TextAlign.Center,
-                    overflow = TextOverflow.Ellipsis
-                )
+                Column(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ){
+                        Text(
+                            text = tarea.titulo.toString()
+                        )
+                        Text(
+                            text = tarea.fecha ?: "",
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+
+                            )
+                    }
+
+                }
             }
             Row(
                 modifier = Modifier.fillMaxWidth()
             ){
                 Text(
-                    text = nota.contenido.toString()
+                    text = tarea.contenido.toString()
                 )
             }
-            Row(
-                modifier = Modifier.fillMaxWidth()
-                    .padding(5.dp, 0.dp),
-                horizontalArrangement = Arrangement.End
-            ){
-                Text(
-                    text = nota.fecha.toString(),
-                    textAlign = TextAlign.End,
-                    fontSize = 10.sp,
-                )
-            }
+
         }
     }
 }

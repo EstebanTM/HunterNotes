@@ -7,8 +7,8 @@ data class TareaState(
         id = 0,
         titulo = "",
         contenido = "",
-        descripcion = "",
-        multimedia = ""
+        fecha = null,
+        localizacion = ""
     ),
     val tareas: List<TareaEntity> = emptyList()
 )

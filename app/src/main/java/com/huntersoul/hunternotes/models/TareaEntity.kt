@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 data class TareaEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val titulo: String,
-    val contenido: String,
-    val descripcion: String,
-    val multimedia: Any
+    val titulo: String?,
+    val contenido: String?,
+    val fecha: String?,
+    val localizacion: String?,
 )
