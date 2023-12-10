@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -25,7 +26,9 @@ import com.huntersoul.hunternotes.screens.EditNoteScreen
 import com.huntersoul.hunternotes.screens.EditTareaScreen
 import com.huntersoul.hunternotes.screens.NotasView
 import com.huntersoul.hunternotes.screens.TareasView
+
 import com.huntersoul.hunternotes.viewmodel.TareaViewModel
+
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -40,7 +43,6 @@ fun NavManager(){
     val tareaRepo = TareaRepository(tareaDao)
     val notasViewModel = NotaViewModel(notaRepo)
     val tareasViewModel = TareaViewModel(tareaRepo)
-
     Scaffold(
         bottomBar = {
             NavBar(navController = navController)
@@ -71,6 +73,7 @@ fun NavManager(){
                     EditTareaScreen(id, tareaRepo, navController, tareasViewModel)
                 }
             }
+
         }
     }
 }

@@ -1,31 +1,23 @@
 package com.huntersoul.hunternotes
 
-import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.R
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.Scaffold
-import androidx.compose.material.TopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.huntersoul.hunternotes.ui.theme.HunterNotesTheme
-import com.huntersoul.hunternotes.R.string
 import com.huntersoul.hunternotes.navigation.NavManager
+import com.huntersoul.hunternotes.permissions.PermisoAlmacenamiento
+import com.huntersoul.hunternotes.permissions.PermisoLocalizacion
+import com.huntersoul.hunternotes.permissions.PermisoNotificacion
 
 class MainActivity : ComponentActivity() {
+    //@RequiresApi(Build.VERSION_CODES.O)
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -36,6 +28,11 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     NavManager()
+                    //PermisoNotificacion()
+                    PermisoAlmacenamiento()
+                    PermisoLocalizacion()
+
+
                 }
             }
         }

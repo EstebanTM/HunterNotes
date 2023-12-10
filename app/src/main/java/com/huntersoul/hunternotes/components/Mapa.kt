@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,8 +37,8 @@ import org.osmdroid.views.overlay.CopyrightOverlay
 
 @Composable
 fun OSMComposeMapa(
-    modifier: Modifier = Modifier.fillMaxSize(),
-    //onLocationSelected: (GeoPoint) -> Unit
+    modifier: Modifier = Modifier.size(30.dp,60.dp),
+    onLocationSelected: (GeoPoint) -> Unit
     ) {
 
     // define properties with remember with default value
@@ -51,7 +52,6 @@ fun OSMComposeMapa(
         rotation = 90f // default is 0f
     )
 
-
     // setup mapProperties in side effect
     SideEffect {
         mapProperties = mapProperties
@@ -61,38 +61,15 @@ fun OSMComposeMapa(
             .copy(zoomButtonVisibility = ZoomButtonVisibility.SHOW_AND_FADEOUT)
     }
 
-
     // define camera state
     val cameraState = rememberCameraState {
         geoPoint = GeoPoint(20.1389, -101.15088)
         zoom = 18.0 // optional, default is 5.0
     }
 
-
-//    viewModel.directions_get("driving-car",
-//        GeoPoint(20.139261336104898, -101.15026781862757),
-//        GeoPoint(20.142110828753893, -101.1787275290486),
-//        )
-
-//    Log.d("GIVO",rutaUiState.value.toString())
-    // define polyline
-    var geoPointPoluLyne = remember {
-        listOf(GeoPoint(20.1389,-101.15088),
-            GeoPoint(20.1434,-101.1498),
-            GeoPoint(20.14387,-101.15099),
-            GeoPoint(20.14395,-101.15128),
-            GeoPoint(20.14411,-101.15186))
-        //rutaUiState.value.resp?.features[0].geometry.coordinates.map { GeoPoint(it[0],it[1]) }
-
-
-    }
-
-
-
     val overlayManagerState = rememberOverlayManagerState()
 
     val ctx = LocalContext.current
-    //Agregar nodo Mapa
 
     OpenStreetMap(cameraState = cameraState  ,
         properties = mapProperties,
@@ -104,14 +81,7 @@ fun OSMComposeMapa(
         modifier = modifier
     )
     {
-        //Button(
-            //onClick = {
-                // Acción al hacer clic en el botón "Aceptar"
-                // Puedes agregar aquí la lógica que desees al hacer clic en el botón
-          //  }
-        //) {
-          //  Text(text = "Aceptar")
-        //}
+
         Marker(state = depokMarkerState, title="ITSUR", snippet = "Escuela") {
             // create info window node
             Column(
@@ -127,11 +97,10 @@ fun OSMComposeMapa(
             }
 
         }
-        //if(rutaUiState.value.resp!=null){
-        // geoPointPoluLyne = rutaUiState.value.resp!!.features[0].geometry.coordinates.map { GeoPoint(it[1],it[0]) }
-        Polyline(geoPoints = geoPointPoluLyne) {
-
+        DisposableEffect(Unit) {
+            onLocationSelected(GeoPoint(20.1389, -101.15088)) // Supongamos que `initialLocation` es la GeoPoint inicial del mapa
+            onDispose { /* Cleanup, si es necesario */ }
         }
-        //}
+
     }
 }

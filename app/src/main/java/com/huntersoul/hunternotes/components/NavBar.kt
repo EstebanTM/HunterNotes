@@ -2,9 +2,11 @@ package com.huntersoul.hunternotes.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.outlined.Create
+import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.Icon
@@ -34,14 +36,19 @@ fun NavBar(navController: NavHostController) {
         val listOfNavItems = listOf(
             BottomNavigationItem(
                 title = "Notas",
-                selectedIcon = ImageVector.vectorResource(R.drawable.outline_note_24),
-                unselectedIcon = ImageVector.vectorResource(R.drawable.outline_note_24),
+                selectedIcon = ImageVector.vectorResource(R.drawable.notahome),
+                unselectedIcon = ImageVector.vectorResource(R.drawable.notahome),
             ),
             BottomNavigationItem(
                 title = "Tareas",
-                selectedIcon = Icons.Filled.Create,
-                unselectedIcon = Icons.Outlined.Create,
-            )
+                selectedIcon = ImageVector.vectorResource(R.drawable.tarea),
+                unselectedIcon = ImageVector.vectorResource(R.drawable.tarea),
+            ),
+            BottomNavigationItem(
+                title = "MarsApi",
+                selectedIcon = ImageVector.vectorResource(R.drawable.baseline_wifi),
+                unselectedIcon = ImageVector.vectorResource(R.drawable.baseline_wifi),
+        )
         )
 
         listOfNavItems.forEach{ navItem ->
