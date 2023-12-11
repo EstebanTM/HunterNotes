@@ -48,7 +48,7 @@ fun NotasView(
                         onClick = {
                             navHostController.navigate("agregarNota")
                         }){
-                        Icon(Icons.Default.Add, "")
+                        Icon(ImageVector.vectorResource(R.drawable.noteadd), "")
                         Text(text= "")
                     }
                 }

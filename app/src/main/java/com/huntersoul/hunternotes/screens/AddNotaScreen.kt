@@ -2,6 +2,7 @@ package com.huntersoul.hunternotes.screens
 
 import android.net.Uri
 import android.os.Build
+import android.os.Environment
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -41,10 +42,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.navigation.NavHostController
 import androidx.work.WorkManager
@@ -56,7 +59,9 @@ import com.huntersoul.hunternotes.repository.NotaRepository
 import com.huntersoul.hunternotes.viewmodel.NotaViewModel
 import java.time.LocalDateTime
 import androidx.work.OneTimeWorkRequestBuilder
-
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -72,8 +77,6 @@ fun AddNoteScreen(
     var descripcion by remember { mutableStateOf("") }
     var fechaActual = "${LocalDateTime.now().dayOfMonth}/${LocalDateTime.now().month.value}/${LocalDateTime.now().year}"
 
-    var uri : Uri? = null
-
     var hasImage by remember {
         mutableStateOf(false)
     }
@@ -82,11 +85,38 @@ fun AddNoteScreen(
         mutableStateOf<Uri?>(null)
     }
 
+    //val imagePicker = rememberLauncherForActivityResult(
+      //  contract = ActivityResultContracts.GetContent(),
+        //onResult = {uri ->
+          //  hasImage = uri != null
+            //imageUri = uri
+        //}
+    //)
+    val contextE = LocalContext.current
     val imagePicker = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent(),
-        onResult = {uri ->
-            hasImage = uri != null
-            imageUri = uri
+        onResult = { uri ->
+            if (uri != null) {
+                val context = contextE
+
+                val imageFileName = "nombre_archivo.jpg"
+                val storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                val imageFile = File(storageDir, imageFileName)
+
+                try {
+                    context.contentResolver.openInputStream(uri)?.use { input ->
+                        FileOutputStream(imageFile).use { output ->
+                            input.copyTo(output)
+                        }
+                    }
+                    // Obtener la URI utilizando FileProvider
+                    imageUri = uri
+                    hasImage = true
+                } catch (e: IOException) {
+                    // Manejar la excepción según tus necesidades
+                    e.printStackTrace()
+                }
+            }
         }
     )
 
@@ -94,7 +124,7 @@ fun AddNoteScreen(
         id = 0,
         titulo = titulo,
         contenido = descripcion,
-        multimedia = imageUri.toString(),
+        multimedia =  imageUri,
         fecha = fechaActual
     )
     Scaffold(
@@ -106,6 +136,7 @@ fun AddNoteScreen(
                 Spacer(modifier = Modifier.padding(4.dp))
                 Row(){
                     FloatingActionButton(onClick = {
+
                         imagePicker.launch("image/*")
                     }){
                         Icon(ImageVector.vectorResource(R.drawable.gallery), null)
@@ -201,6 +232,29 @@ fun AddNoteScreen(
     }
 
 }
+@Composable
+private fun saveImageToExternalStorage(uri: Uri): Uri {
+    val context = LocalContext.current
+
+    val imageFileName = "nombre_archivo.jpg"
+    val storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+    val imageFile = File(storageDir, imageFileName)
+
+    try {
+        context.contentResolver.openInputStream(uri)?.use { input ->
+            FileOutputStream(imageFile).use { output ->
+                input.copyTo(output)
+            }
+        }
+    } catch (e: IOException) {
+        // Manejar la excepción según tus necesidades
+        e.printStackTrace()
+    }
+
+    // Obtener la URI utilizando FileProvider
+    return FileProvider.getUriForFile(context, "com.huntersoul.hunternotes.fileprovider", imageFile)
+}
+
 private fun onAcceptButtonClicked() {
     // Trigger the notification worker when the button is clicked
     val notificationWorkRequest =OneTimeWorkRequestBuilder<NotificationWorker>().build()
@@ -226,23 +280,26 @@ fun EditNoteScreen(
         mutableStateOf(nota.multimedia != null)
     }
     var imageUri by remember {
-        mutableStateOf<Uri?>(nota.multimedia?.toUri())
+        mutableStateOf<Uri?>(nota.multimedia?.let { Uri.parse(it.toString()) })
     }
 
-    val imagePicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent(),
-        onResult = {
-            hasImage = it != null
-            imageUri = it
-        }
-    )
 
     var entity = NotaEntity(
         id = id,
         titulo = titulo,
         contenido = descripcion,
-        multimedia = imageUri.toString(),
+        multimedia = imageUri,
         fecha = fechaActual,
+    )
+    val imagePicker = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent(),
+        onResult = { uri ->
+            if (uri != null) {
+                hasImage = true
+                imageUri = uri
+                entity = entity.copy(multimedia = uri) // Actualiza la entidad con la nueva URI
+            }
+        }
     )
 
     Scaffold(

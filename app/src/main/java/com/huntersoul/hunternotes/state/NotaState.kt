@@ -7,7 +7,7 @@ data class NotaState(
         id = 0,
         titulo = "",
         contenido = "",
-        multimedia = "",
+        multimedia = null,
         fecha = "",
     ),
     val notas: List<NotaEntity> = emptyList()

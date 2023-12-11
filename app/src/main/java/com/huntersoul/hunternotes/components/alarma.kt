@@ -26,9 +26,6 @@ import com.huntersoul.hunternotes.alarmManager.AlarmSchedulerImpl
 import com.huntersoul.hunternotes.models.TareaEntity
 import java.time.LocalDateTime
 
-
-
-
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun Alarma(
