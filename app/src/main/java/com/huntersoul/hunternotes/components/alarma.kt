@@ -17,7 +17,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -38,6 +37,7 @@ entity:TareaEntity
     var secondText by remember {
         mutableStateOf("")
     }
+
     val alarmScheduler: AlarmScheduler = AlarmSchedulerImpl(LocalContext.current)
     var alarmItem: AlarmItem? = null
     Row(
@@ -70,9 +70,7 @@ entity:TareaEntity
         Button(onClick = {
             if(secondText != ""){
                 alarmItem = AlarmItem(
-                    time = LocalDateTime.now().plusSeconds(
-                        secondText.toLong()
-                    ),
+                    time = LocalDateTime.now().plusSeconds(secondText.toLong()),
                     title = "La tarea debe realizarse:",
                     message = entity.titulo
                 )

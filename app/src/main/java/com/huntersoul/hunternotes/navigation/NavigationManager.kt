@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -17,16 +16,16 @@ import androidx.room.Room
 import com.huntersoul.hunternotes.components.NavBar
 import com.huntersoul.hunternotes.repository.NotaRepository
 import com.huntersoul.hunternotes.database.NotaDataBase
+import com.huntersoul.hunternotes.network.screensN.MarsPhotosApp
 import com.huntersoul.hunternotes.repository.TareaRepository
 import com.huntersoul.hunternotes.viewmodel.NotaViewModel
-
 import com.huntersoul.hunternotes.screens.AddNoteScreen
 import com.huntersoul.hunternotes.screens.AddTareaScreen
+//import com.huntersoul.hunternotes.screens.ApiScreen
 import com.huntersoul.hunternotes.screens.EditNoteScreen
 import com.huntersoul.hunternotes.screens.EditTareaScreen
 import com.huntersoul.hunternotes.screens.NotasView
 import com.huntersoul.hunternotes.screens.TareasView
-
 import com.huntersoul.hunternotes.viewmodel.TareaViewModel
 
 
@@ -72,6 +71,9 @@ fun NavManager(){
                 if(id != null){
                     EditTareaScreen(id, tareaRepo, navController, tareasViewModel)
                 }
+            }
+            composable(route = "ApiServ") {
+                MarsPhotosApp()
             }
 
         }

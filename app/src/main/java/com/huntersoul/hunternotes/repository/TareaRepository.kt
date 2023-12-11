@@ -1,7 +1,6 @@
 package com.huntersoul.hunternotes.repository
 
 import com.huntersoul.hunternotes.models.TareaEntity
-
 import com.huntersoul.hunternotes.notaDao.TareaDao
 
 class TareaRepository(

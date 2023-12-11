@@ -6,10 +6,13 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.huntersoul.hunternotes.network.dataN.DefaultAppContainer
 
 class AlarmApp: Application() {
+    lateinit var container: DefaultAppContainer
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate() {
+        container = DefaultAppContainer()
         super.onCreate()
         val channelId = "alarm_id"
         val channelName = "alarm_name"

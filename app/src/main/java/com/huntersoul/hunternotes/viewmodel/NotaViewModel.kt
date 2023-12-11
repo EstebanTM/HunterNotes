@@ -8,9 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.huntersoul.hunternotes.models.NotaEntity
 import com.huntersoul.hunternotes.repository.NotaRepository
 import com.huntersoul.hunternotes.state.NotaState
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class NotaViewModel(

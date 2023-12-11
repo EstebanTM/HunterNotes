@@ -4,7 +4,6 @@ import android.os.Build
 import com.huntersoul.hunternotes.models.TareaEntity
 import com.huntersoul.hunternotes.repository.TareaRepository
 import com.huntersoul.hunternotes.viewmodel.TareaViewModel
-
 import android.content.Context
 import android.content.pm.PackageManager
 import android.widget.Toast
@@ -17,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
-
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -30,7 +28,6 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.DatePicker
@@ -63,7 +60,6 @@ import java.time.LocalDate
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.O)

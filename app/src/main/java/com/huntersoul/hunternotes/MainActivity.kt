@@ -11,12 +11,14 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.huntersoul.hunternotes.ui.theme.HunterNotesTheme
 import com.huntersoul.hunternotes.navigation.NavManager
+import com.huntersoul.hunternotes.network.dataN.NetworkMarsPhotosRepository
+import com.huntersoul.hunternotes.network.viewModelN.MarsViewModel
 import com.huntersoul.hunternotes.permissions.PermisoAlmacenamiento
 import com.huntersoul.hunternotes.permissions.PermisoLocalizacion
-import com.huntersoul.hunternotes.permissions.PermisoNotificacion
+//import dagger.hilt.android.AndroidEntryPoint
 
+//@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    //@RequiresApi(Build.VERSION_CODES.O)
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,12 +29,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+
                     NavManager()
-                    //PermisoNotificacion()
                     PermisoAlmacenamiento()
                     PermisoLocalizacion()
-
-
                 }
             }
         }

@@ -1,14 +1,5 @@
 package com.huntersoul.hunternotes.components
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Create
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material.icons.outlined.Create
-import androidx.compose.material.icons.outlined.DateRange
-import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -45,7 +36,7 @@ fun NavBar(navController: NavHostController) {
                 unselectedIcon = ImageVector.vectorResource(R.drawable.tarea),
             ),
             BottomNavigationItem(
-                title = "MarsApi",
+                title = "ApiServ",
                 selectedIcon = ImageVector.vectorResource(R.drawable.baseline_wifi),
                 unselectedIcon = ImageVector.vectorResource(R.drawable.baseline_wifi),
         )
